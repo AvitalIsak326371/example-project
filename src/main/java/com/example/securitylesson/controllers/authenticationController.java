@@ -13,11 +13,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
-@RequiredArgsConstructor
+
 public class authenticationController {
 
 
-   private  final UserDao userDao;
+    public authenticationController(UserDao userDao, JwtUtils jwtUtils, AuthenticationManager authenticationManager) {
+        this.userDao = userDao;
+        this.jwtUtils = jwtUtils;
+        this.authenticationManager = authenticationManager;
+    }
+
+    private  final UserDao userDao;
    private  final JwtUtils jwtUtils;
    private  final AuthenticationManager authenticationManager;
     @PostMapping("/authenticate")
